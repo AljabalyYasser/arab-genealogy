@@ -15,4 +15,4 @@
 ## التقنيات
 HTML / CSS / JavaScript
 
-**إعداد وتصميم وتطوير: ياسر أحمد**
+**Prepared and Designed By : Yasser Ahmed**
