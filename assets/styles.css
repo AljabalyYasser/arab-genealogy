@@ -4,7 +4,7 @@
   --green:#55c995;--blue:#78aef6;--rust:#db8068;--line:rgba(215,182,111,.28);--hair:rgba(255,255,255,.08);
   --shadow:0 22px 70px rgba(0,0,0,.28);--r1:28px;--r2:20px;--r3:14px;
 }
-*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;color:var(--text);font-family:"IBM Plex Sans Arabic",sans-serif;background:
+*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;color:var(--text);font-family:"Readex Pro",sans-serif;background:
 radial-gradient(circle at 8% 6%,rgba(215,182,111,.09),transparent 24%),
 radial-gradient(circle at 88% 14%,rgba(85,201,149,.07),transparent 24%),
 linear-gradient(180deg,#06110d 0,#081711 54%,#050d0a 100%);overflow-x:hidden}
