@@ -83,3 +83,31 @@ h1{font-size:clamp(44px,6.2vw,82px);line-height:1.18;margin:18px 0 14px;letter-s
     padding-block: 34px 46px;
   }
 }
+
+/* Hero title breathing space — corrected */
+.hero-grid > div:first-child{
+  padding-block: 0;
+}
+
+.hero h1{
+  margin-top: clamp(32px, 3vw, 52px);
+  margin-bottom: clamp(38px, 3.5vw, 60px);
+}
+
+@media (max-width: 768px){
+  .hero-grid > div:first-child{
+    padding-block: 0;
+  }
+
+  .hero h1{
+    margin-top: 28px;
+    margin-bottom: 34px;
+  }
+}
+
+@media (max-width: 480px){
+  .hero h1{
+    margin-top: 24px;
+    margin-bottom: 30px;
+  }
+}
