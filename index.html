@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07130f">
+<meta name="author" content="ياسر أحمد">
+<meta name="creator" content="ياسر أحمد">
+<meta name="description" content="مرجع تفاعلي لفهم أنساب العرب: عرض مبسط، وتفصيل للعرب البائدة والعاربة والمستعربة، مع مصطلحات علم النسب ومواضع الخلاف والمراجع.">
+<title>مشجرة أنساب العرب — الأصول والفروع</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#06110d;--bg2:#091913;--panel:#0d2119;--panel2:#11291f;--panel3:#173328;
+  --text:#f5f0e6;--muted:#a9b8b0;--faint:#76877e;--gold:#d7b66f;--gold2:#efdba7;
+  --green:#55c995;--blue:#78aef6;--rust:#db8068;--line:rgba(215,182,111,.28);--hair:rgba(255,255,255,.08);
+  --shadow:0 22px 70px rgba(0,0,0,.28);--r1:28px;--r2:20px;--r3:14px;
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;color:var(--text);font-family:"IBM Plex Sans Arabic",sans-serif;background:
+radial-gradient(circle at 8% 6%,rgba(215,182,111,.09),transparent 24%),
+radial-gradient(circle at 88% 14%,rgba(85,201,149,.07),transparent 24%),
+linear-gradient(180deg,#06110d 0,#081711 54%,#050d0a 100%);overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;background-image:linear-gradient(30deg,rgba(215,182,111,.08) 12%,transparent 12.5%,transparent 87%,rgba(215,182,111,.08) 87.5%),linear-gradient(150deg,rgba(215,182,111,.05) 12%,transparent 12.5%,transparent 87%,rgba(215,182,111,.05) 87.5%);background-size:46px 80px;mask-image:linear-gradient(to bottom,#000,transparent 78%)}
+button,input,summary{font:inherit}.wrap{width:min(1720px,calc(100% - 48px));margin:auto;position:relative;z-index:1}.reading{width:min(1180px,calc(100% - 48px));margin:auto;position:relative;z-index:1}
+.hero{padding:50px 0 28px}.hero-grid{display:grid;grid-template-columns:1.28fr .72fr;gap:38px;align-items:center}.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border:1px solid rgba(215,182,111,.27);border-radius:999px;background:rgba(215,182,111,.05);color:var(--gold2);font-size:12px}.eyebrow:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 15px var(--gold)}
+h1{font-size:clamp(44px,6.2vw,82px);line-height:1.18;margin:18px 0 14px;letter-spacing:-1px}h1 span{display:block;color:var(--gold2);margin-top:.08em}.hero-copy{max-width:900px;color:var(--muted);font-size:16px;line-height:1.95;margin:0}.hero-note{margin-top:14px;color:var(--faint);font-size:12px;line-height:1.8}
+.mark{min-height:330px;position:relative;display:grid;place-items:center}.orbit{position:absolute;border:1px solid rgba(215,182,111,.2);border-radius:50%;animation:spin 30s linear infinite}.o1{width:315px;height:315px}.o2{width:225px;height:225px;border-style:dashed;animation-direction:reverse;animation-duration:24s}.o3{width:142px;height:142px;border-color:rgba(85,201,149,.24);animation-duration:18s}.orbit:before,.orbit:after{content:"";position:absolute;width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 16px rgba(215,182,111,.55)}.orbit:before{top:-4px;left:50%}.orbit:after{bottom:-4px;right:50%}.crest{width:118px;height:118px;display:grid;place-items:center;border-radius:30px;transform:rotate(45deg);border:1px solid rgba(215,182,111,.5);background:linear-gradient(145deg,#17382a,#0a2118);box-shadow:0 22px 55px rgba(0,0,0,.34)}.crest span{transform:rotate(-45deg);font-size:25px;color:var(--gold2);font-weight:700}@keyframes spin{to{transform:rotate(360deg)}}
+.modebar{position:sticky;top:0;z-index:30;padding:10px 0;background:linear-gradient(180deg,rgba(5,13,10,.98),rgba(5,13,10,.79),transparent);backdrop-filter:blur(15px)}.modes{max-width:680px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:6px;border:1px solid var(--hair);background:rgba(13,30,23,.88);border-radius:18px;box-shadow:var(--shadow)}.mode-btn{border:0;background:transparent;color:var(--muted);border-radius:13px;padding:12px 14px;cursor:pointer}.mode-btn b{display:block;font-size:15px}.mode-btn small{font-size:10px}.mode-btn.active{color:var(--gold2);background:linear-gradient(135deg,rgba(215,182,111,.21),rgba(215,182,111,.07));box-shadow:inset 0 0 0 1px rgba(215,182,111,.24)}
+.mode{display:none;padding:34px 0}.mode.active{display:block;animation:fade .25s ease}@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.kicker{color:var(--gold);font-size:12px;margin-bottom:6px}.section-title{font-size:clamp(29px,4vw,44px);margin:0;line-height:1.25}.section-desc{max-width:980px;color:var(--muted);line-height:1.9;font-size:14px;margin:8px 0 0}
+.simple-layout{margin-top:24px}.simple-root{width:max-content;max-width:100%;margin:0 auto 42px;padding:15px 28px;border:1px solid rgba(215,182,111,.45);background:linear-gradient(180deg,#204534,#123126);border-radius:16px;text-align:center;position:relative}.simple-root strong{display:block;font-size:23px;color:var(--gold2)}.simple-root span{font-size:11px;color:var(--muted)}.simple-root:after{content:"";position:absolute;width:1px;height:28px;background:var(--line);bottom:-28px;right:50%}
+.simple-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;position:relative}.simple-grid:before{content:"";position:absolute;top:-15px;right:16.6%;left:16.6%;height:1px;background:var(--line)}.simple-card{position:relative;border:1px solid var(--hair);background:linear-gradient(150deg,rgba(15,35,27,.96),rgba(8,22,16,.94));border-radius:22px;padding:20px}.simple-card:before{content:"";position:absolute;right:50%;top:-15px;width:1px;height:15px;background:var(--line)}.simple-card h3{margin:0;font-size:22px}.simple-card .alias{font-size:11px;color:var(--gold);margin-top:3px}.simple-card p{color:var(--muted);font-size:13px;line-height:1.8}.mini-chain{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin:13px 0}.mini-chain span{border:1px solid var(--hair);background:rgba(255,255,255,.03);border-radius:10px;padding:7px 9px;font-size:11px}.mini-chain i{font-style:normal;color:var(--gold)}.tribes{display:flex;flex-wrap:wrap;gap:6px}.tribes span{padding:6px 8px;border:1px solid rgba(215,182,111,.16);background:rgba(215,182,111,.045);border-radius:999px;font-size:10.5px;color:#dfe7e2}.simple-warning{margin-top:18px;padding:15px 17px;border:1px solid rgba(215,182,111,.18);background:rgba(215,182,111,.045);border-radius:14px;color:var(--muted);font-size:12px;line-height:1.8}
+.subnav{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:24px 0 14px}.sub-btn{border:1px solid var(--hair);background:rgba(255,255,255,.025);color:var(--muted);padding:13px 10px;border-radius:14px;cursor:pointer;text-align:center}.sub-btn b{display:block;color:#e7ece9;font-size:13px}.sub-btn small{font-size:9.5px}.sub-btn.active{border-color:rgba(215,182,111,.42);background:rgba(215,182,111,.11);color:var(--gold2)}.detail-page{display:none}.detail-page.active{display:block;animation:fade .25s ease}
+.detail-head{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:end;margin:20px 0 18px}.detail-head h2{font-size:clamp(29px,4vw,44px);margin:0}.detail-head p{color:var(--muted);font-size:13px;line-height:1.8;margin:6px 0 0;max-width:900px}.source-pill{padding:8px 11px;border:1px solid rgba(215,182,111,.2);border-radius:999px;color:var(--gold2);font-size:10px;background:rgba(215,182,111,.045);white-space:nowrap}
+.chain-box{border:1px solid var(--hair);background:linear-gradient(145deg,rgba(12,30,22,.93),rgba(8,20,15,.9));border-radius:20px;padding:18px 20px;margin-bottom:16px}.chain-label{font-size:10px;color:var(--faint);margin-bottom:10px}.ancestor-chain{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.ancestor-chain span{padding:8px 12px;border:1px solid rgba(215,182,111,.19);background:rgba(255,255,255,.025);border-radius:10px;font-size:12px}.ancestor-chain span.major{border-color:rgba(215,182,111,.44);color:var(--gold2);font-weight:700}.ancestor-chain i{font-style:normal;color:var(--gold)}
+.branch-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}.branch-card{grid-column:span 6;border:1px solid var(--hair);background:linear-gradient(145deg,rgba(13,33,25,.96),rgba(8,22,16,.95));border-radius:20px;overflow:hidden}.branch-card.wide{grid-column:1/-1}.branch-card.third{grid-column:span 4}.branch-card>summary{list-style:none;cursor:pointer;padding:17px 18px;display:flex;justify-content:space-between;align-items:center;gap:14px}.branch-card>summary::-webkit-details-marker{display:none}.branch-card>summary .sum-title b{display:block;font-size:20px}.branch-card>summary .sum-title small{display:block;color:var(--muted);font-size:10.5px;margin-top:2px}.toggle{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(215,182,111,.22);border-radius:999px;padding:6px 9px;color:var(--gold2);font-size:10px;background:rgba(215,182,111,.05)}.branch-card[open] .toggle:before{content:"−"}.branch-card[open] .toggle:after{content:"اطوِ"}.branch-card:not([open]) .toggle:before{content:"+"}.branch-card:not([open]) .toggle:after{content:"افتح"}.branch-body{border-top:1px solid var(--hair);padding:16px 18px 18px}.path{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px}.path span{font-size:9.5px;color:var(--faint)}.path span:not(:last-child):after{content:"←";margin-inline:5px;color:rgba(215,182,111,.55)}.path span:last-child{color:var(--gold2)}
+.lineage{margin:0;padding:0;list-style:none}.lineage ul{list-style:none;margin:4px 0 0;padding:0 18px 0 0;border-right:1px solid rgba(215,182,111,.22)}.lineage li{position:relative;margin:5px 0;padding-right:12px}.lineage ul>li:before{content:"";position:absolute;right:-18px;top:17px;width:14px;height:1px;background:rgba(215,182,111,.25)}.person{display:inline-flex;align-items:center;gap:7px;max-width:100%;padding:5px 9px;border-radius:9px;border:1px solid rgba(255,255,255,.075);background:rgba(255,255,255,.025);font-size:12px;line-height:1.55}.person.root{font-size:14px;font-weight:700;color:var(--gold2);border-color:rgba(215,182,111,.3);background:rgba(215,182,111,.05)}.person.disputed{border-style:dashed;border-color:rgba(219,128,104,.55);color:#f4c0b4}.person .note{font-size:9px;color:var(--faint);font-weight:400}.leaf-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.leaf-tags span{font-size:10px;border:1px solid var(--hair);border-radius:999px;padding:5px 8px;color:#d8e0dc;background:rgba(255,255,255,.02)}.branch-note{margin-top:12px;padding:10px 12px;border-radius:11px;background:rgba(215,182,111,.04);border:1px solid rgba(215,182,111,.13);font-size:10.5px;line-height:1.7;color:var(--muted)}
+.term-intro{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}.info-card{border:1px solid var(--hair);border-radius:18px;background:rgba(13,31,24,.9);padding:18px}.info-card h3{margin:0 0 7px;font-size:18px}.info-card p{margin:0;color:var(--muted);font-size:12px;line-height:1.8}.levels{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.level{display:grid;grid-template-columns:44px 130px 1fr;gap:12px;align-items:center;border:1px solid var(--hair);background:rgba(255,255,255,.025);border-radius:14px;padding:11px 13px}.level .num{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:rgba(215,182,111,.08);color:var(--gold2);border:1px solid rgba(215,182,111,.18);font-weight:700}.level b{font-size:14px}.level p{margin:0;color:var(--muted);font-size:11px;line-height:1.7}.level.common{border-color:rgba(85,201,149,.25)}.level.common b:after{content:"• من الستة الأشهر";font-size:8px;color:var(--green);margin-right:6px;font-weight:500}
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}.rule{border:1px solid var(--hair);border-radius:14px;padding:14px;background:rgba(255,255,255,.02)}.rule b{font-size:13px;color:var(--gold2)}.rule p{margin:5px 0 0;color:var(--muted);font-size:10.5px;line-height:1.7}
+.accordions{display:grid;gap:10px;margin:24px 0 0}.mega{border:1px solid var(--hair);background:linear-gradient(145deg,rgba(12,29,22,.9),rgba(8,20,15,.88));border-radius:17px;overflow:hidden}.mega>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:17px 18px;font-weight:700}.mega>summary::-webkit-details-marker{display:none}.mega>summary:after{content:"+";width:28px;height:28px;border-radius:9px;display:grid;place-items:center;color:var(--gold2);border:1px solid rgba(215,182,111,.16);background:rgba(215,182,111,.06)}.mega[open]>summary:after{content:"−"}.mega-body{border-top:1px solid var(--hair);padding:15px 18px}.dispute{display:grid;grid-template-columns:170px 1fr;gap:14px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.05)}.dispute:last-child{border:0}.dispute b{color:var(--gold2)}.dispute p{margin:0;color:var(--muted);font-size:11px;line-height:1.8}.sources{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.source{padding:12px;border:1px solid var(--hair);border-radius:12px;background:rgba(255,255,255,.025);color:var(--text);text-decoration:none}.source b{display:block;color:var(--gold2);font-size:12px}.source small{color:var(--muted);font-size:10px;line-height:1.6}.source.plain{cursor:default}
+.signature{margin:34px 0 42px;padding-top:23px;border-top:1px solid var(--hair);display:flex;justify-content:center;gap:10px;align-items:center;color:var(--faint);font-size:11px}.signature strong{color:var(--gold2);font-size:13px}.signature:before,.signature:after{content:"";width:90px;height:1px;background:linear-gradient(90deg,transparent,rgba(215,182,111,.45))}.signature:after{transform:scaleX(-1)}
+@media(max-width:1050px){.hero-grid{grid-template-columns:1fr}.mark{min-height:240px}.o1{width:220px;height:220px}.o2{width:160px;height:160px}.o3{width:104px;height:104px}.crest{width:85px;height:85px;border-radius:22px}.crest span{font-size:19px}.simple-grid{grid-template-columns:1fr}.simple-grid:before,.simple-card:before,.simple-root:after{display:none}.simple-root{margin-bottom:16px}.branch-card,.branch-card.third{grid-column:1/-1}.term-intro{grid-template-columns:1fr}.levels{grid-template-columns:1fr}.rules{grid-template-columns:1fr}.sources{grid-template-columns:1fr}}
+@media(max-width:720px){.wrap,.reading{width:min(100% - 24px,1720px)}.hero{padding:28px 0 15px}.hero-grid{gap:8px}h1{font-size:clamp(38px,12vw,58px);line-height:1.2}.hero-copy{font-size:14px}.mark{min-height:210px}.modes{border-radius:15px}.mode-btn{padding:10px 7px}.mode-btn b{font-size:13px}.subnav{grid-template-columns:1fr 1fr}.sub-btn{min-height:58px}.detail-head{grid-template-columns:1fr}.source-pill{justify-self:start}.chain-box{padding:14px}.ancestor-chain{gap:6px}.ancestor-chain span{padding:6px 8px;font-size:10.5px}.branch-grid{display:block}.branch-card{margin-bottom:10px;border-radius:16px}.branch-card>summary{padding:14px}.branch-card>summary .sum-title b{font-size:17px}.branch-body{padding:12px 13px 14px}.lineage ul{padding-right:13px}.lineage li{padding-right:9px;margin:4px 0}.lineage ul>li:before{right:-13px;width:10px}.person{font-size:11px;padding:4px 7px}.person.root{font-size:12.5px}.level{grid-template-columns:38px 90px 1fr;padding:9px}.level b{font-size:12px}.level p{font-size:9.5px}.level.common b:after{display:none}.dispute{grid-template-columns:1fr;gap:4px}.signature:before,.signature:after{width:35px}}
+
+/* Hierarchy clarity */
+.nav-groups{display:grid;gap:10px;margin:24px 0 14px}.nav-group{border:1px solid var(--hair);background:rgba(255,255,255,.018);border-radius:18px;padding:10px}.nav-group-label{font-size:10px;color:var(--gold);margin:0 4px 8px}.nav-group .subnav{margin:0}.nav-group.primary .subnav{grid-template-columns:repeat(3,1fr)}.nav-group.secondary .subnav{grid-template-columns:repeat(3,1fr)}
+.tree-key{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0 18px;color:var(--faint);font-size:10px}.tree-key span{display:inline-flex;align-items:center;gap:6px}.tree-key i{display:inline-block;width:9px;height:9px;border-radius:3px}.tree-key .k-root i{background:var(--gold)}.tree-key .k-major i{background:var(--green)}.tree-key .k-sub i{background:rgba(255,255,255,.38)}
+.lineage>li>.person{font-size:15px;font-weight:700;color:var(--gold2);border-color:rgba(215,182,111,.48);background:linear-gradient(145deg,rgba(215,182,111,.16),rgba(215,182,111,.05));padding:8px 12px}
+.lineage>li>ul>li>.person{font-size:13.5px;font-weight:700;color:#eaf7f0;border-color:rgba(85,201,149,.34);background:rgba(85,201,149,.075);padding:7px 10px}
+.lineage>li>ul>li>ul>li>.person{font-size:12px;font-weight:600;color:#e3ebe7;border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.028);padding:6px 9px}
+.lineage>li>ul>li>ul>li>ul>li>.person{font-size:11px;font-weight:500;padding:5px 8px;background:rgba(255,255,255,.018);border-color:rgba(255,255,255,.075)}
+.lineage ul ul{border-right-color:rgba(85,201,149,.18)}.lineage ul ul ul{border-right-color:rgba(255,255,255,.09)}
+.relation-note{margin:10px 0 0;color:var(--faint);font-size:10.5px;line-height:1.75}.relation-note strong{color:var(--gold2)}
+.section-map{border:1px solid var(--hair);background:linear-gradient(145deg,rgba(13,33,25,.96),rgba(8,22,16,.95));border-radius:20px;padding:18px;margin-bottom:16px}.section-map h3{margin:0 0 12px;font-size:18px}.section-map .lineage{max-width:1000px;margin:auto}.section-map .lineage>li{text-align:center}.section-map .lineage>li>ul{text-align:right}
+.fullpage-banner{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 16px;margin:12px 0 16px;border:1px solid rgba(215,182,111,.16);border-radius:14px;background:rgba(215,182,111,.035)}.fullpage-banner b{font-size:13px;color:var(--gold2)}.fullpage-banner span{font-size:10px;color:var(--muted)}
+.family-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.family-card{border:1px solid var(--hair);background:rgba(255,255,255,.02);border-radius:16px;padding:15px}.family-card h3{font-size:16px;margin:0 0 10px;color:var(--gold2)}.family-card p{font-size:11px;color:var(--muted);line-height:1.75}.name-list{display:flex;flex-wrap:wrap;gap:7px}.name-list span{border:1px solid var(--hair);background:rgba(255,255,255,.025);border-radius:999px;padding:6px 9px;font-size:10.5px;color:#e4ebe7}
+@media(max-width:900px){.nav-group.primary .subnav,.nav-group.secondary .subnav{grid-template-columns:1fr 1fr}.family-grid{grid-template-columns:1fr}}
+@media(max-width:620px){.nav-group.primary .subnav,.nav-group.secondary .subnav{grid-template-columns:1fr}.nav-group{padding:7px}.tree-key{margin-top:9px}.lineage>li>.person{font-size:13.5px}.lineage>li>ul>li>.person{font-size:12.5px}.lineage>li>ul>li>ul>li>.person{font-size:11.5px}.fullpage-banner{align-items:flex-start;flex-direction:column}}
+
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">مرجع بصري تفاعلي لأنساب العرب</span>
+      <h1>مشجرة أنساب العرب <span>الأصول والفروع</span></h1>
+      <p class="hero-copy">تضم الصفحة مستويين للقراءة: صورة عامة مبسطة لفهم الأقسام الكبرى أولًا، ثم عرضًا تفصيليًا يبيّن الأصل ثم الفرع ثم ما يتفرع عنه، مع أقسام مستقلة لقريش والنسب النبوي ومصطلحات علم النسب.</p>
+      <p class="hero-note">النسخة التفصيلية أوسع من المختصرة، لكنها لا تدّعي حصر جميع القبائل والبطون؛ فالغاية تنظيم الأصول والفروع البارزة بصورة يسهل تتبعها، مع بيان مواضع الخلاف عند الحاجة.</p>
+    </div>
+    <div class="mark" aria-hidden="true"><div class="orbit o1"></div><div class="orbit o2"></div><div class="orbit o3"></div><div class="crest"><span>العرب</span></div></div>
+  </div>
+</header>
+<div class="modebar"><div class="reading"><div class="modes">
+  <button class="mode-btn active" data-mode="simple"><b>الصورة العامة</b><small>لفهم التقسيم قبل التفاصيل</small></button>
+  <button class="mode-btn" data-mode="deep"><b>القسم التفصيلي</b><small>البائدة والعاربة والمستعربة والمصطلحات</small></button>
+</div></div></div>
+
+<main>
+<section id="simple" class="mode active reading">
+  <div class="kicker">ابدأ من هنا</div><h2 class="section-title">الصورة العامة لأنساب العرب</h2>
+  <p class="section-desc">هذه الخريطة تعطي الصورة الكبرى قبل الدخول في التفاصيل. التقسيم هنا تعليمي مبسط، ثم يأتي بعده عرض أوسع يوضح تسلسل الأصل والفرع والفرع المتولد عنه.</p>
+  <div class="simple-layout">
+    <div class="simple-root"><strong>العرب</strong><span>صورة عامة مبسطة</span></div>
+    <div class="simple-grid">
+      <article class="simple-card"><h3>العرب البائدة</h3><div class="alias">أمم عربية قديمة اندثرت</div><p>تدخل فيها أمم قديمة اشتهرت في كتب الأخبار والأنساب، ومن أشهر أسمائها عاد وثمود وطسم وجديس وعمليق.</p><div class="mini-chain"><span>أمم قديمة</span><i>←</i><span>فروع متعددة</span></div><div class="tribes"><span>عاد</span><span>ثمود</span><span>طسم</span><span>جديس</span><span>عمليق</span></div></article>
+      <article class="simple-card"><h3>العرب العاربة</h3><div class="alias">القحطانيون</div><p>يبدأ أشهر عمودهم بقحطان، ثم يعرب ويشجب وسبأ، ومن سبأ يبرز الفرعان الكبيران: حمير وكهلان.</p><div class="mini-chain"><span>قحطان</span><i>←</i><span>يعرب</span><i>←</i><span>يشجب</span><i>←</i><span>سبأ</span></div><div class="tribes"><span>حمير</span><span>كهلان</span><span>الأزد</span><span>همدان</span><span>مذحج</span><span>طيء</span></div></article>
+      <article class="simple-card"><h3>العرب المستعربة</h3><div class="alias">العدنانيون / الإسماعيليون في التقسيم التراثي</div><p>ينتهي عمودهم إلى عدنان ثم معد ونزار، ومن نزار تتشعب الفروع الكبرى مثل مضر وربيعة وإياد، مع خلاف مشهور في أنمار.</p><div class="mini-chain"><span>عدنان</span><i>←</i><span>معد</span><i>←</i><span>نزار</span></div><div class="tribes"><span>مضر</span><span>ربيعة</span><span>إياد</span><span>قريش</span><span>تميم</span><span>هوازن</span></div></article>
+    </div>
+    <div class="simple-warning">مصطلحا «العاربة» و«المستعربة» من التقسيمات التراثية المشهورة في كتب الأنساب. ويُفصل المختلف فيه في موضع مستقل حتى لا يظهر القول المختلف فيه كأنه نسب متفق عليه.</div>
+  </div>
+</section>
+
+<section id="deep" class="mode wrap">
+  <div class="kicker">القراءة المتعمقة</div><h2 class="section-title">التفصيل المنظم للمشجرة</h2>
+  <p class="section-desc">يبدأ كل قسم بأصل واضح، ثم تُرتب الفروع تحته بحسب درجتها. اختلاف حجم العقدة ولونها مقصود ليساعد على معرفة الأصل والفرع والفرع التابع بمجرد النظر.</p>
+  <div class="tree-key"><span class="k-root"><i></i> أصل رئيسي</span><span class="k-major"><i></i> فرع كبير</span><span class="k-sub"><i></i> فرع تابع</span></div>
+
+  <div class="nav-groups">
+    <div class="nav-group primary"><div class="nav-group-label">الأقسام الكبرى</div><nav class="subnav" aria-label="الأقسام الكبرى">
+      <button class="sub-btn active" data-page="extinct"><b>العرب البائدة</b><small>الأمم القديمة وفروعها</small></button>
+      <button class="sub-btn" data-page="qahtan"><b>العرب العاربة</b><small>قحطان وحمير وكهلان</small></button>
+      <button class="sub-btn" data-page="adnan"><b>العرب المستعربة</b><small>عدنان ومضر وربيعة</small></button>
+    </nav></div>
+    <div class="nav-group secondary"><div class="nav-group-label">تفصيل متصل بالنسب العدناني</div><nav class="subnav" aria-label="قريش والنسب النبوي والمصطلحات">
+      <button class="sub-btn" data-page="quraysh"><b>قريش</b><small>عمود قريش وأهم بطونها</small></button>
+      <button class="sub-btn" data-page="prophet"><b>النسب النبوي</b><small>العمود والأسرة الأقرب</small></button>
+      <button class="sub-btn" data-page="terms"><b>مصطلحات النسب</b><small>الشعب والقبيلة والبطن...</small></button>
+    </nav></div>
+  </div>
+
+  <!-- Extinct -->
+  <section id="page-extinct" class="detail-page active">
+    <div class="detail-head"><div><h2>العرب البائدة</h2><p>أمم عربية قديمة انقرضت، وتتناقل كتب الأخبار والأنساب روايات مختلفة في تفاصيل أنساب بعضها. ويُعرض هنا أشهر التسلسل التراثي مع فصل ما ثبت خبره بنصوص مشهورة عما هو من روايات النسابين.</p></div></div>
+    <div class="section-map"><h3>التسلسل العام</h3><ul class="lineage"><li><span class="person root">سام بن نوح</span><ul>
+      <li><span class="person">لاوذ</span><ul><li><span class="person">طسم</span></li><li><span class="person">عمليق</span><ul><li><span class="person">خيبر</span></li></ul></li></ul></li>
+      <li><span class="person">إرم</span><ul><li><span class="person">جديس</span></li><li><span class="person">عبد ضخم</span></li><li><span class="person">جاثر</span><ul><li><span class="person">ثمود</span></li></ul></li><li><span class="person">عوص</span><ul><li><span class="person">عاد</span></li></ul></li></ul></li>
+      <li><span class="person disputed">جرهم الأولى <span class="note">يختلف في تفصيل نسبها</span></span></li>
+    </ul></li></ul></div>
+    <div class="branch-grid">
+      <details class="branch-card wide" open><summary><span class="sum-title"><b>أشهر الأمم البائدة</b><small>معلومات موجزة تساعد على فهم الأسماء</small></span><span class="toggle"></span></summary><div class="branch-body"><div class="rules">
+        <div class="rule"><b>عاد</b><p>قوم هود عليه السلام، وارتبط خبرهم بالأحقاف، وقد ورد ذكرهم في مواضع متعددة من القرآن.</p></div>
+        <div class="rule"><b>ثمود</b><p>قوم صالح عليه السلام، ومن أشهر ما ورد في خبرهم مساكن الحجر ونحت البيوت في الجبال.</p></div>
+        <div class="rule"><b>طسم وجديس</b><p>أمتان تذكرهما كتب الأخبار والأنساب ضمن العرب البائدة، وأكثر تفاصيل قصصهما من الروايات التاريخية والأدبية.</p></div>
+        <div class="rule"><b>عمليق</b><p>اسم يرد في كتب الأنساب للأماليق، وتختلف الروايات في تفصيل فروعهم وديارهم.</p></div>
+      </div></div></details>
+    </div>
+  </section>
+
+  <!-- Qahtan -->
+  <section id="page-qahtan" class="detail-page">
+    <div class="detail-head"><div><h2>العرب العاربة — القحطانيون</h2><p>يُقرأ هذا القسم من الأعلى إلى الأسفل: قحطان هو الأصل الأعلى هنا، ثم تظهر الفروع المنسوبة إليه، ويستمر عمود يعرب إلى يشجب ثم سبأ، ومن سبأ يتفرع حمير وكهلان.</p></div></div>
+    <div class="section-map"><h3>الخريطة العليا لقحطان</h3><ul class="lineage"><li><span class="person root">قحطان</span><ul>
+      <li><span class="person">يعرب</span><ul><li><span class="person">يشجب</span><ul><li><span class="person">سبأ (عبد شمس)</span><ul><li><span class="person">حمير</span></li><li><span class="person">كهلان</span></li></ul></li></ul></li></ul></li>
+      <li><span class="person disputed">حضرموت <span class="note">يُنسب إلى قحطان في روايات مشهورة</span></span></li>
+      <li><span class="person disputed">جرهم الثانية <span class="note">ترد نسبتها إلى قحطان أو يقطن في بعض الروايات</span></span></li>
+    </ul></li></ul><p class="relation-note"><strong>طريقة القراءة:</strong> حمير وكهلان ليسا ابنين مباشرين لقحطان في هذا التسلسل؛ بل يأتيان بعد قحطان ← يعرب ← يشجب ← سبأ.</p></div>
+    <div class="branch-grid">
+      <details class="branch-card" open><summary><span class="sum-title"><b>حمير</b><small>فرع كبير من سبأ</small></span><span class="toggle"></span></summary><div class="branch-body">
+        <div class="path"><span>قحطان</span><span>يعرب</span><span>يشجب</span><span>سبأ</span><span>حمير</span></div>
+        <ul class="lineage"><li><span class="person root">حمير</span><ul>
+          <li><span class="person">الهميسع</span><div class="leaf-tags"><span>أيمن</span><span>الغوث</span><span>زهير</span><span>جرهم</span><span>أبين</span><span>عريب</span><span>مهرة</span></div></li>
+          <li><span class="person">مالك</span><ul><li><span class="person disputed">قضاعة <span class="note">على قول من يلحقها بحمير</span></span><ul><li><span class="person">حيدان</span></li><li><span class="person">جرم</span></li><li><span class="person">نهد</span></li><li><span class="person">بهراء</span></li><li><span class="person">بلي</span></li><li><span class="person">جهينة</span></li><li><span class="person">عذرة</span></li><li><span class="person">كلب</span></li></ul></li></ul></li>
+        </ul></li></ul>
+      </div></details>
+
+      <details class="branch-card" open><summary><span class="sum-title"><b>كهلان</b><small>فرع كبير من سبأ</small></span><span class="toggle"></span></summary><div class="branch-body">
+        <div class="path"><span>قحطان</span><span>يعرب</span><span>يشجب</span><span>سبأ</span><span>كهلان</span></div>
+        <ul class="lineage"><li><span class="person root">كهلان</span><ul>
+          <li><span class="person">الأزد</span><div class="leaf-tags"><span>غسان</span><span>الأوس</span><span>الخزرج</span><span>خزاعة — مختلف فيها</span><span>بارق</span><span>غامد</span><span>زهران</span><span>شنوءة</span></div></li>
+          <li><span class="person">همدان</span><ul><li><span class="person">حاشد</span><div class="leaf-tags"><span>بنو يريم</span><span>حجور</span><span>فائش</span><span>قابض</span><span>شبام</span><span>الجندع</span><span>يام</span><span>وادعة</span><span>السبيع</span><span>الحارث</span><span>خارف</span><span>الصائد</span></div></li><li><span class="person">بكيل</span><div class="leaf-tags"><span>صهلان</span><span>مرهبة</span><span>أرحب</span><span>شاكر</span></div></li></ul></li>
+          <li><span class="person">مذحج</span><div class="leaf-tags"><span>مراد</span><span>سعد العشيرة</span><span>جلد</span><span>عنس</span><span>النخع</span><span>جعفي</span><span>زبيد</span><span>صداء</span><span>جنب</span><span>الحارث بن كعب</span></div></li>
+          <li><span class="person">طيء</span><div class="leaf-tags"><span>جرم</span><span>نبهان</span><span>هناء</span><span>بولان</span><span>ثعل</span><span>سنبس</span><span>سلامان</span><span>بحتر</span><span>ثعلبة</span><span>غزية</span><span>لام</span></div></li>
+          <li><span class="person">كندة</span><div class="leaf-tags"><span>السكون</span><span>السكاسك</span><span>معاوية</span><span>الحارث</span></div></li>
+          <li><span class="person">لخم</span></li><li><span class="person">جذام</span></li><li><span class="person">عاملة</span></li><li><span class="person">الأشعر</span></li><li><span class="person">خولان</span></li>
+          <li><span class="person disputed">أنمار <span class="note">مختلف في إلحاقه بقحطان أو عدنان</span></span><ul><li><span class="person">خثعم</span><div class="leaf-tags"><span>شهران</span><span>ناهس</span><span>أكلب — دخلوا في خثعم بالحلف عند بعض النسابين</span></div></li><li><span class="person">بجيلة</span></li></ul></li>
+        </ul></li></ul>
+      </div></details>
+    </div>
+  </section>
+
+  <!-- Adnan -->
+  <section id="page-adnan" class="detail-page">
+    <div class="detail-head"><div><h2>العرب المستعربة — العدنانيون</h2><p>يبدأ العمود من عدنان ثم معد ثم نزار. ومن نزار تتفرع مضر وربيعة وإياد، ويذكر أنمار مع خلاف مشهور في نسبه. قريش لها قسم مستقل لأنها فرع كبير داخل مضر.</p></div></div>
+    <div class="section-map"><h3>الخريطة العليا لعدنان</h3><ul class="lineage"><li><span class="person root">عدنان</span><ul><li><span class="person">معد</span><ul><li><span class="person">نزار</span><ul><li><span class="person">مضر</span></li><li><span class="person">ربيعة</span></li><li><span class="person">إياد</span></li><li><span class="person disputed">أنمار <span class="note">مختلف في نسبه</span></span></li></ul></li></ul></li></ul></li></ul><p class="relation-note">يُنسب عدنان إلى ذرية إسماعيل عليه السلام في كتب النسب، أما تفصيل الأسماء بين عدنان وإسماعيل ففيه خلاف قديم؛ لذلك لا تُعرض سلسلة غير متفق عليها.</p></div>
+    <div class="branch-grid">
+      <details class="branch-card wide" open><summary><span class="sum-title"><b>مضر</b><small>إلياس وقيس عيلان ثم الفروع الكبرى</small></span><span class="toggle"></span></summary><div class="branch-body">
+        <div class="path"><span>عدنان</span><span>معد</span><span>نزار</span><span>مضر</span></div>
+        <ul class="lineage"><li><span class="person root">مضر</span><ul>
+          <li><span class="person">إلياس</span><ul>
+            <li><span class="person">مدركة (عامر)</span><ul><li><span class="person">خزيمة</span><ul><li><span class="person">كنانة</span><div class="leaf-tags"><span>النضر</span><span>عبد مناة</span><span>مالك</span><span>ملكان</span></div></li></ul></li><li><span class="person">هذيل</span></li></ul></li>
+            <li><span class="person">طابخة (عمرو)</span><div class="leaf-tags"><span>تميم</span><span>ضبة</span><span>مزينة</span></div></li>
+            <li><span class="person">قمعة (عمير)</span></li>
+          </ul></li>
+          <li><span class="person">قيس عيلان</span><ul>
+            <li><span class="person">منصور</span><ul><li><span class="person">هوازن</span><ul><li><span class="person">بنو سعد</span></li><li><span class="person">ثقيف</span></li><li><span class="person">عامر</span><ul><li><span class="person">صعصعة</span><ul><li><span class="person">عامر</span><div class="leaf-tags"><span>كلاب</span><span>عقيل</span><span>نمير</span></div></li></ul></li></ul></li></ul></li><li><span class="person">سليم</span></li></ul></li>
+            <li><span class="person">غطفان</span><ul><li><span class="person">عبس</span></li><li><span class="person">أشجع</span></li><li><span class="person">ذبيان</span><ul><li><span class="person">فزارة</span></li><li><span class="person">مرة</span></li></ul></li></ul></li>
+            <li><span class="person">عدوان</span></li><li><span class="person">باهلة</span></li><li><span class="person">فهم</span></li>
+          </ul></li>
+        </ul></li></ul>
+      </div></details>
+
+      <details class="branch-card wide" open><summary><span class="sum-title"><b>ربيعة</b><small>عنزة وجديلة ووائل وبكر وتغلب وعبد القيس</small></span><span class="toggle"></span></summary><div class="branch-body">
+        <div class="path"><span>عدنان</span><span>معد</span><span>نزار</span><span>ربيعة</span></div>
+        <ul class="lineage"><li><span class="person root">ربيعة</span><ul>
+          <li><span class="person">أسد</span><ul><li><span class="person">عنزة</span></li><li><span class="person">جديلة</span><ul><li><span class="person">دُعمي</span><ul><li><span class="person">أفصى</span><ul><li><span class="person">عبد القيس</span></li><li><span class="person">هنب</span><ul><li><span class="person">قاسط</span><ul><li><span class="person">النمر</span></li><li><span class="person">وائل</span><ul><li><span class="person">بكر</span><div class="leaf-tags"><span>شيبان</span><span>عجل</span><span>حنيفة</span><span>يشكر</span><span>سدوس</span></div></li><li><span class="person">تغلب</span></li><li><span class="person">عنز</span></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li>
+          <li><span class="person">ضبيعة</span></li><li><span class="person disputed">أكلب <span class="note">دخلوا في خثعم بالحلف عند بعض النسابين</span></span></li>
+        </ul></li></ul>
+      </div></details>
+
+      <details class="branch-card" open><summary><span class="sum-title"><b>إياد</b><small>فرع من نزار</small></span><span class="toggle"></span></summary><div class="branch-body"><ul class="lineage"><li><span class="person root">نزار</span><ul><li><span class="person">إياد</span></li></ul></li></ul></div></details>
+      <details class="branch-card" open><summary><span class="sum-title"><b>أنمار</b><small>موضع خلاف</small></span><span class="toggle"></span></summary><div class="branch-body"><ul class="lineage"><li><span class="person root">نزار</span><ul><li><span class="person disputed">أنمار</span></li></ul></li></ul><div class="branch-note">من النسابين من يلحق أنمارًا بنزار، ومنهم من يلحقه بقحطان؛ لذلك أُبقي هنا بعلامة خلاف.</div></div></details>
+    </div>
+  </section>
+
+  <!-- Quraysh -->
+  <section id="page-quraysh" class="detail-page">
+    <div class="detail-head"><div><h2>قريش</h2><p>قريش من كنانة من مضر من عدنان. يبدأ هذا القسم بعمود النسب إلى فهر، ثم يوضح أهم البطون القرشية المتفرعة من لؤي وكعب ومرة وكلاب وقصي.</p></div></div>
+    <div class="section-map"><h3>عمود قريش</h3><ul class="lineage"><li><span class="person root">مضر</span><ul><li><span class="person">إلياس</span><ul><li><span class="person">مدركة</span><ul><li><span class="person">خزيمة</span><ul><li><span class="person">كنانة</span><ul><li><span class="person disputed">النضر <span class="note">قريش عند طائفة من أهل النسب</span></span><ul><li><span class="person">مالك</span><ul><li><span class="person root">فهر <span class="note">قريش عند طائفة أخرى</span></span></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></div>
+    <div class="branch-grid">
+      <details class="branch-card wide" open><summary><span class="sum-title"><b>من فهر إلى قصي</b><small>العمود الذي تتشعب منه بطون قريش الكبرى</small></span><span class="toggle"></span></summary><div class="branch-body"><ul class="lineage"><li><span class="person root">فهر</span><ul><li><span class="person">غالب</span><ul><li><span class="person">لؤي</span><ul><li><span class="person">كعب</span><ul><li><span class="person">مرة</span><ul><li><span class="person">كلاب</span><ul><li><span class="person">قصي</span></li><li><span class="person">زهرة</span></li></ul></li><li><span class="person">تيم</span></li><li><span class="person">يقظة</span><ul><li><span class="person">مخزوم</span></li></ul></li></ul></li><li><span class="person">عدي</span></li><li><span class="person">هصيص</span><ul><li><span class="person">سهم</span></li><li><span class="person">جمح</span></li></ul></li></ul></li><li><span class="person">عامر</span></li></ul></li></ul></li><li><span class="person">الحارث</span></li><li><span class="person">محارب</span></li></ul></li></ul></div></details>
+      <details class="branch-card wide" open><summary><span class="sum-title"><b>بنو قصي</b><small>ومنهم عبد مناف وعبد الدار وعبد العزى</small></span><span class="toggle"></span></summary><div class="branch-body"><ul class="lineage"><li><span class="person root">قصي</span><ul><li><span class="person">عبد مناف</span><ul><li><span class="person">هاشم</span></li><li><span class="person">عبد شمس</span><div class="leaf-tags"><span>بنو أمية</span></div></li><li><span class="person">المطلب</span></li><li><span class="person">نوفل</span></li></ul></li><li><span class="person">عبد الدار</span></li><li><span class="person">عبد العزى</span></li></ul></li></ul></div></details>
+    </div>
+  </section>
+
+  <!-- Prophetic lineage -->
+  <section id="page-prophet" class="detail-page">
+    <div class="detail-head"><div><h2>النسب النبوي والأسرة الأقرب</h2><p>يتصل نسب النبي محمد ﷺ بقريش من بني هاشم. يعرض هذا القسم العمود الأبوي، ثم أقرب أفراد الأسرة: الأعمام والعمات، الزوجات، الأبناء والبنات.</p></div></div>
+    <div class="section-map"><h3>العمود الأبوي</h3><ul class="lineage"><li><span class="person root">فهر</span><ul><li><span class="person">غالب</span><ul><li><span class="person">لؤي</span><ul><li><span class="person">كعب</span><ul><li><span class="person">مرة</span><ul><li><span class="person">كلاب</span><ul><li><span class="person">قصي</span><ul><li><span class="person">عبد مناف</span><ul><li><span class="person">هاشم</span><ul><li><span class="person">عبد المطلب</span><ul><li><span class="person">عبدالله</span><ul><li><span class="person root">محمد ﷺ</span></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></div>
+    <div class="family-grid">
+      <div class="family-card"><h3>أعمامه</h3><div class="name-list"><span>العباس</span><span>أبو طالب</span><span>حمزة</span><span>الحارث</span><span>أبو لهب</span><span>الزبير</span><span>ضرار</span><span>المقوم</span><span>قثم</span><span>الغيداق</span><span>حجل</span><span>عبد الكعبة</span></div></div>
+      <div class="family-card"><h3>عماته</h3><div class="name-list"><span>صفية</span><span>عاتكة</span><span>أروى</span><span>برة</span><span>أم حكيم البيضاء</span><span>أميمة</span></div></div>
+      <div class="family-card"><h3>زوجاته أمهات المؤمنين</h3><div class="name-list"><span>خديجة بنت خويلد</span><span>سودة بنت زمعة</span><span>عائشة بنت أبي بكر</span><span>حفصة بنت عمر</span><span>زينب بنت خزيمة</span><span>زينب بنت جحش</span><span>جويرية بنت الحارث</span><span>أم حبيبة رملة بنت أبي سفيان</span><span>صفية بنت حيي</span><span>أم سلمة هند بنت أبي أمية</span><span>ميمونة بنت الحارث</span></div></div>
+      <div class="family-card"><h3>أبناؤه وبناته</h3><div class="name-list"><span>القاسم</span><span>عبدالله</span><span>إبراهيم</span><span>زينب</span><span>رقية</span><span>أم كلثوم</span><span>فاطمة</span></div><p>ومن أشهر ذريته ﷺ: الحسن والحسين من فاطمة رضي الله عنها وعلي بن أبي طالب رضي الله عنه.</p></div>
+    </div>
+  </section>
+
+  <!-- Terms -->
+  <section id="page-terms" class="detail-page">
+    <div class="detail-head"><div><h2>مصطلحات وطبقات النسب</h2><p>تستخدم كتب الأنساب ألفاظًا للدلالة على اتساع الجماعة أو قربها من الأصل. وقد تختلف حدود بعض هذه المصطلحات وترتيبها بين المؤلفين، لكن الترتيب الآتي من أشهر ما يُستعمل في الشروح التقليدية.</p></div></div>
+    <div class="term-intro"><div class="info-card"><h3>الطبقات الموسعة</h3><p>الجذم، الجماهير، الشعوب، القبيلة، العمارة، البطن، الفخذ، العشيرة، الفصيلة، الرهط.</p></div><div class="info-card"><h3>الست طبقات الأشهر</h3><p>الشعب، القبيلة، العمارة، البطن، الفخذ، الفصيلة.</p></div></div>
+    <div class="levels">
+      <div class="level"><span class="num">1</span><b>الجذم</b><p>الأصل الأعلى الذي ترجع إليه جماعات كبيرة، ويستعمل مثلًا في الأصول الكبرى كعدنان وقحطان.</p></div>
+      <div class="level"><span class="num">2</span><b>الجماهير</b><p>الجماعات الواسعة.</p></div>
+      <div class="level common"><span class="num">3</span><b>الشعب</b><p>طبقة واسعة تجمع عدة قبائل.</p></div>
+      <div class="level common"><span class="num">4</span><b>القبيلة</b><p>تجمع عدة عمائر، وقد تطلق في الاستعمال العام على جماعة نسبية واسعة.</p></div>
+      <div class="level common"><span class="num">5</span><b>العمارة</b><p>تجمع البطون.</p></div>
+      <div class="level common"><span class="num">6</span><b>البطن</b><p>يجمع الأفخاذ.</p></div>
+      <div class="level common"><span class="num">7</span><b>الفخذ</b><p>فرع من البطن، وتتفرع منه جماعات أصغر.</p></div>
+      <div class="level"><span class="num">8</span><b>العشيرة</b><p>جماعة أقرب نسبًا من الفخذ في بعض اصطلاحات أهل النسب.</p></div>
+      <div class="level common"><span class="num">9</span><b>الفصيلة</b><p>أقرب أهل الرجل وعصبته الأدنون في هذا الاصطلاح.</p></div>
+      <div class="level"><span class="num">10</span><b>الرهط</b><p>جماعة الرجل الأقربون، ويستعمل اللفظ أيضًا في معنى الجماعة القليلة من الرجال.</p></div>
+    </div>
+    <div class="rules">
+      <div class="rule"><b>قد تصح أكثر من نسبة للشخص</b><p>قد يكون الرجل هاشميًا وقرشيًا ومضريًا وعدنانيًا في الوقت نفسه؛ لأن كل نسبة تشير إلى طبقة أوسع من الأخرى.</p></div>
+      <div class="rule"><b>الحلف والموالاة</b><p>قد تنضم جماعة إلى قبيلة بالحلف أو الموالاة، فيظهر اسم القبيلة في الأخبار دون أن يعني ذلك دائمًا بنوة مباشرة.</p></div>
+      <div class="rule"><b>أسماء القبائل</b><p>قد تُنسب القبيلة إلى أب، أو أم، أو موضع، أو سبب اشتهرت به؛ ولذلك لا تكشف التسمية وحدها عن نوع العلاقة النسبية.</p></div>
+    </div>
+  </section>
+
+  <div class="accordions">
+    <details class="mega"><summary>المختلف فيه في كتب الأنساب</summary><div class="mega-body">
+      <div class="dispute"><b>قضاعة</b><p>من أشهر مواضع الخلاف: قيل من حمير وقيل من معد، ولذلك لا تُعرض نسبتها على أنها قول واحد محسوم.</p></div>
+      <div class="dispute"><b>خزاعة</b><p>تختلف أقوال النسابين في نسبها؛ فمنهم من يلحقها بالأزد، ومنهم من يذكر لها نسبًا آخر.</p></div>
+      <div class="dispute"><b>أنمار</b><p>تختلف الروايات في إلحاقه بعدنان أو قحطان.</p></div>
+      <div class="dispute"><b>قريش: النضر أم فهر؟</b><p>اختلف أهل النسب في الحد الذي يطلق عليه اسم قريش؛ لذلك يظهر الرأيان عند موضعهما.</p></div>
+      <div class="dispute"><b>ما بين عدنان وإسماعيل</b><p>أصل انتساب عدنان إلى ذرية إسماعيل مشهور، أما أسماء وعدد الآباء بينهما ففيها خلاف قديم؛ لذلك لا تُدرج سلسلة تفصيلية غير متفق عليها.</p></div>
+      <div class="dispute"><b>ما فوق قحطان</b><p>اختلفت كتب النسب في نسب قحطان وما فوقه، ولذلك يبدأ القسم التفصيلي من قحطان ولا يجعل ما فوقه عمودًا قطعيًا.</p></div>
+    </div></details>
+    <details class="mega"><summary>المراجع</summary><div class="mega-body"><div class="sources">
+      <a class="source" href="https://shamela.ws/book/9793" target="_blank" rel="noopener"><b>ابن حزم — جمهرة أنساب العرب</b><small>من أوسع المراجع في أجذام العرب، وعدنان، وقريش، ومواضع الخلاف.</small></a>
+      <a class="source" href="https://shamela.ws/book/31382" target="_blank" rel="noopener"><b>القلقشندي — نهاية الأرب في معرفة أنساب العرب</b><small>مرجع جامع في القبائل وطبقات النسب وأسمائها.</small></a>
+      <a class="source" href="https://shamela.ws/book/352" target="_blank" rel="noopener"><b>الهمداني — الإكليل</b><small>من المراجع المهمة في أنساب اليمن وقبائلها.</small></a>
+      <a class="source" href="https://shamela.ws/book/2922" target="_blank" rel="noopener"><b>مصعب الزبيري — نسب قريش</b><small>مرجع متخصص في بطون قريش وأنسابها.</small></a>
+    </div></div></details>
+  </div>
+
+  <footer class="signature"><span>أعدها وصممها:</span><strong>ياسر احمد</strong></footer>
+</section>
+</main>
+<script>
+const modeBtns=[...document.querySelectorAll('.mode-btn')];
+modeBtns.forEach(btn=>btn.addEventListener('click',()=>{
+  modeBtns.forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.mode').forEach(m=>m.classList.remove('active'));
+  document.getElementById(btn.dataset.mode).classList.add('active');
+  window.scrollTo({top:document.querySelector('.modebar').offsetTop,behavior:'smooth'});
+}));
+const subBtns=[...document.querySelectorAll('.sub-btn')];
+subBtns.forEach(btn=>btn.addEventListener('click',()=>{
+  subBtns.forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.detail-page').forEach(p=>p.classList.remove('active'));
+  const page=document.getElementById('page-'+btn.dataset.page);
+  if(page) page.classList.add('active');
+  history.replaceState(null,'','#'+btn.dataset.page);
+}));
+const hash=location.hash.replace('#','');
+const hashBtn=document.querySelector(`[data-page="${hash}"]`);
+if(hashBtn){
+  const deepBtn=document.querySelector('[data-mode="deep"]');
+  if(deepBtn) deepBtn.click();
+  hashBtn.click();
+}
+</script>
+</body></html>
