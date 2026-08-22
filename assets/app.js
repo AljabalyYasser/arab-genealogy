@@ -156,7 +156,7 @@ function contextFor(el){
   const section=el.closest('.detail-page');
   return section?.querySelector('.detail-head h2')?.textContent.trim()||'';
 }
-const candidates=[...document.querySelectorAll('.detail-page:not(.guide-page) .person,.detail-page:not(.guide-page) .leaf-tags>span,.detail-page:not(.guide-page) .name-list>span')];
+const candidates=[...document.querySelectorAll('.detail-page:not(.guide-page) .person,.detail-page:not(.guide-page) .leaf-tags>span,.detail-page:not(.guide-page) .name-list>span,.detail-page:not(.guide-page) .prophet-lineage-chain>span[data-guide-id],.detail-page:not(.guide-page) .ancestor-chain>span[data-guide-id]')];
 candidates.forEach((el,i)=>{
   const name=cleanNodeName(el); if(!name)return;
   const lineage=contextFor(el);
