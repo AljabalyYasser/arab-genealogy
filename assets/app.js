@@ -53,6 +53,24 @@ document.querySelectorAll('.expanded-tree').forEach(tree=>{
   const parent=tree.previousElementSibling;
   parent?.querySelector('.tree-expand')?.addEventListener('click',()=>setTreeState(tree,true));
   parent?.querySelector('.tree-collapse')?.addEventListener('click',()=>setTreeState(tree,false));
+
+  tree.querySelectorAll('.person.root').forEach(rootPerson=>{
+    const rootLi=rootPerson.closest('li');
+    rootLi?.querySelectorAll('li').forEach(li=>{
+      let depth=0;
+      let cursor=li;
+      while(cursor&&cursor!==rootLi){
+        cursor=cursor.parentElement?.closest('li');
+        depth+=1;
+      }
+      if(cursor!==rootLi||depth<2)return;
+      const ul=[...li.children].find(x=>x.tagName==='UL');
+      if(!ul)return;
+      li.classList.add('is-collapsed');
+      const fold=[...li.children].find(x=>x.classList?.contains('person'))?.querySelector('.node-fold');
+      if(fold){fold.textContent='+';fold.setAttribute('aria-label','افتح الفرع');}
+    });
+  });
 });
 
 /* Guide */
@@ -88,9 +106,7 @@ function pickRecord(name,lineage){
   return bestScore>0?best:ids[0];
 }
 
-const fallback=[];
 const nodeRecord=new WeakMap();
-const seenFallback=new Set();
 function contextFor(el){
   const tree=el.closest('.expanded-tree');
   if(tree){
@@ -113,23 +129,8 @@ const candidates=[...document.querySelectorAll('.detail-page:not(.guide-page) .p
 candidates.forEach((el,i)=>{
   const name=cleanNodeName(el); if(!name)return;
   const lineage=contextFor(el);
-  const direct=pickRecord(name,lineage);
-  let id=direct;
-  if(!id){
-    const key=norm(name)+'|'+norm(lineage);
-    if(!seenFallback.has(key)){
-      seenFallback.add(key);
-      id='fallback-'+fallback.length;
-      fallback.push({
-        id,name,type:'فرع نسبي',lineage,
-        summary:'يظهر هذا الاسم في المشجرة ضمن التسلسل الموضح. لم أضف له وصفاً تاريخياً أو جغرافياً مستقلاً حين لم أجد مادة تكفي لصياغة مسؤولة.',
-        geography:'',branches:[],figures:[],history:'',
-        status:'مادة تعريفية محدودة',notes:'غياب التفاصيل هنا لا يعني قلة شأن الفرع؛ بل يعني أن المادة التي أمكن توثيقها ضمن نطاق التحقيق لم تكف لإضافة بطاقة أوسع.',sources:[]
-      });
-    }else{
-      id=fallback.find(r=>norm(r.name)+'|'+norm(r.lineage)===key)?.id;
-    }
-  }
+  const id=el.dataset.guideId||pickRecord(name,lineage);
+  if(!id)return;
   nodeRecord.set(el,id);
   el.classList.add('has-guide');
   const b=document.createElement('button');
@@ -139,13 +140,13 @@ candidates.forEach((el,i)=>{
   el.append(b);
 });
 
-const allRecords=[...Object.values(curated),...fallback];
-const getRecord=id=>curated[id]||fallback.find(r=>r.id===id);
+const allRecords=Object.values(curated);
+const getRecord=id=>curated[id];
 const guideCount=document.getElementById('guide-count');
 if(guideCount)guideCount.textContent=allRecords.length.toLocaleString('ar');
 
 function searchable(r){
-  return norm([r.name,(r.aliases||[]).join(' '),r.type,r.lineage,r.summary,r.geography,(r.branches||[]).join(' '),(r.figures||[]).join(' '),r.history,r.status,r.notes].join(' '));
+  return norm([r.name,(r.aliases||[]).join(' '),r.type,r.lineage,r.summary,r.geography,(r.branches||[]).join(' '),(r.figures||[]).join(' '),r.history,r.verse?.text,r.status,r.notes].join(' '));
 }
 let activeFilter='all';
 const input=document.getElementById('guide-search');
@@ -153,9 +154,9 @@ const results=document.getElementById('guide-results');
 
 function filterOK(r){
   if(activeFilter==='all')return true;
-  if(activeFilter==='علم')return r.type==='علم';
+  if(activeFilter==='علم')return (r.type||'').startsWith('علم');
   if(activeFilter==='مختلف')return (r.status||'').includes('مختلف')||(r.notes||'').includes('خلاف');
-  if(activeFilter==='قبيلة')return r.type!=='علم';
+  if(activeFilter==='قبيلة')return !(r.type||'').startsWith('علم');
   return true;
 }
 function renderResults(){
@@ -192,21 +193,32 @@ const panel=document.getElementById('guide-panel');
 const overlay=document.getElementById('guide-overlay');
 const panelContent=document.getElementById('guide-panel-content');
 function section(title,body){return body?`<section class="panel-section"><h4>${title}</h4>${body}</section>`:'';}
-function openGuide(id){
+function openGuide(id,backId=null){
   const r=getRecord(id);if(!r||!panel)return;
+  const returnId=backId||r.branchId||null;
+  const returnRecord=returnId?getRecord(returnId):null;
+  const backButton=returnRecord?`<button type="button" class="guide-back" data-guide-back="${esc(returnRecord.id)}">← الرجوع إلى ${esc(returnRecord.name)}</button>`:'';
   const tags=a=>a?.length?`<div class="panel-tags">${a.map(x=>`<span>${esc(x)}</span>`).join('')}</div>`:'';
-  const src=r.sources?.length?`<div class="panel-sources">${r.sources.map(s=>`<a class="panel-source" href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}<small>${esc(s.kind||'مصدر')}</small></a>`).join('')}</div>`:'';
-  panelContent.innerHTML=`<div class="panel-kicker">${esc(r.type)}</div><h3 class="panel-title">${esc(r.name)}</h3>
+  const figureTags=a=>a?.length?`<div class="panel-tags panel-figures">${a.map(name=>{
+    const figureId=pickRecord(name,r.lineage||'');
+    return figureId?`<button type="button" data-guide-figure="${esc(figureId)}">${esc(name)}<small>عرض التعريف</small></button>`:`<span>${esc(name)}</span>`;
+  }).join('')}</div>`:'';
+  const src=r.sources?.length?`<div class="panel-sources">${r.sources.map(s=>`<a class="panel-source" href="${esc(s.url)}" target="_blank" rel="noopener"><strong>${esc(s.title)}</strong>${s.kind?`<span>${esc(s.kind)}</span>`:''}<small>${esc(s.citation||'')}</small></a>`).join('')}</div>`:'';
+  const verse=r.verse?.text?`<blockquote class="panel-verse"><p>${esc(r.verse.text).replace(/\n/g,'<br>')}</p>${r.verse.source?`<cite>${esc(r.verse.source)}</cite>`:''}</blockquote>`:'';
+  panelContent.innerHTML=`${backButton}<div class="panel-kicker">${esc(r.type)}</div><h3 class="panel-title">${esc(r.name)}</h3>
     ${r.lineage?`<div class="panel-lineage">${esc(r.lineage)}</div>`:''}
     ${r.status?`<div class="panel-status">${esc(r.status)}</div>`:''}
-    ${section('نبذة',`<p>${esc(r.summary)}</p>`)}
+    ${section('نبذة',r.summary?`<p>${esc(r.summary)}</p>`:'')}
     ${section('الجغرافيا',r.geography?`<p>${esc(r.geography)}</p>`:'')}
     ${section('الفروع',tags(r.branches))}
-    ${section('الأعلام',tags(r.figures))}
+    ${section('بعض الأعلام',figureTags(r.figures))}
     ${section('التاريخ والسياق',r.history?`<p>${esc(r.history)}</p>`:'')}
-    ${section('ملاحظات التحقيق',r.notes?`<p>${esc(r.notes)}</p>`:'')}
+    ${section('من شعره',verse)}
+    ${section('تنبيه',r.notes?`<p>${esc(r.notes)}</p>`:'')}
     ${section('المصادر',src)}
   `;
+  panelContent.querySelector('[data-guide-back]')?.addEventListener('click',button=>openGuide(button.currentTarget.dataset.guideBack));
+  panelContent.querySelectorAll('[data-guide-figure]').forEach(button=>button.addEventListener('click',()=>openGuide(button.dataset.guideFigure,r.id)));
   overlay.hidden=false;requestAnimationFrame(()=>overlay.classList.add('show'));
   panel.classList.add('open');panel.setAttribute('aria-hidden','false');document.body.classList.add('guide-open');
 }
