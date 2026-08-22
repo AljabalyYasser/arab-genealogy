@@ -98,6 +98,26 @@ h1{font-size:clamp(44px,6.2vw,82px);line-height:1.18;margin:18px 0 14px;letter-s
 .qahtan-dispute-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .qahtan-dispute-grid article{border:1px solid rgba(219,128,104,.16);border-radius:14px;padding:14px;background:rgba(219,128,104,.025)}
 .qahtan-dispute-grid h4{margin:0 0 7px;color:#f0c0b5;font-size:13px}.qahtan-dispute-grid p{margin:0;color:var(--muted);font-size:10.5px;line-height:1.85}
+.quraysh-overview-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.quraysh-info-card{border:1px solid rgba(255,255,255,.075);border-radius:16px;padding:15px;background:rgba(255,255,255,.018)}
+.quraysh-info-card h4{margin:4px 0 9px;font-size:16px;color:var(--gold2)}
+.quraysh-info-card p{margin:0;color:var(--muted);font-size:10.5px;line-height:1.85}
+.quraysh-content-stack{display:grid;gap:14px;margin:26px 0 22px;padding-top:4px}
+.quraysh-content-panel{overflow:hidden;border:1px solid rgba(215,182,111,.14);border-radius:18px;background:linear-gradient(145deg,rgba(13,33,25,.75),rgba(7,20,14,.78));transition:border-color .2s ease,background .2s ease}
+.quraysh-content-panel>summary{display:grid;grid-template-columns:42px minmax(0,1fr) 28px;gap:14px;align-items:center;min-height:76px;padding:13px 17px;cursor:pointer;list-style:none}
+.quraysh-content-panel>summary::-webkit-details-marker{display:none}
+.quraysh-panel-index{display:grid;place-items:center;align-self:stretch;border-left:1px solid rgba(255,255,255,.07);color:var(--gold);font:700 10px/1 monospace}
+.quraysh-panel-title{display:grid;gap:4px}.quraysh-panel-title b{color:#eef3ef;font-size:16px}.quraysh-panel-title small{color:var(--faint);font-size:10px;line-height:1.6}
+.quraysh-content-panel>summary>i{display:grid;place-items:center;width:26px;height:26px;border:1px solid rgba(215,182,111,.22);border-radius:50%;color:var(--gold2);font-style:normal;font-size:16px;transition:transform .2s ease,background .2s ease}
+.quraysh-content-panel[open]{border-color:rgba(215,182,111,.28);background:linear-gradient(145deg,rgba(15,38,28,.9),rgba(8,24,17,.9))}
+.quraysh-content-panel[open]>summary>i{transform:rotate(45deg);background:rgba(215,182,111,.08)}
+.quraysh-panel-body{padding:18px;border-top:1px solid rgba(255,255,255,.065)}
+.quraysh-panel-body .quraysh-overview-grid{margin-top:0}
+.quraysh-figures-scroll{max-height:min(72vh,760px);overflow:auto;scrollbar-color:rgba(215,182,111,.3) transparent;scrollbar-width:thin}
+.quraysh-figures-scroll .qahtan-content-section{padding:0;border:0;background:none}
+.quraysh-figure-column{display:grid;gap:10px;align-content:start;min-width:0}
+.quraysh-figure-column>.qahtan-figure-group{min-width:0}
+.quraysh-accordions{display:grid;gap:12px;margin-top:0;padding-top:2px}
 
 /* Linked guide nodes */
 .guide-link{display:inline-grid;place-items:center;width:20px;height:20px;border:1px solid rgba(85,201,149,.2);border-radius:50%;background:rgba(85,201,149,.055);color:var(--green);cursor:pointer;font-size:10px;padding:0;margin-inline-start:3px;vertical-align:middle}
@@ -159,7 +179,8 @@ body.guide-open{overflow:hidden}
   .expanded-tree .lineage ul{padding-right:13px}
   .qahtan-section-head{grid-template-columns:1fr;gap:8px}
   .qahtan-section-head>span{justify-self:start}
-  .qahtan-overview-grid,.qahtan-figure-groups,.adnan-figure-groups,.qahtan-dispute-grid{grid-template-columns:1fr}
+  .qahtan-overview-grid,.qahtan-figure-groups,.adnan-figure-groups,.qahtan-dispute-grid,.quraysh-overview-grid{grid-template-columns:1fr}
+  .quraysh-content-stack{margin-top:20px;gap:11px}.quraysh-content-panel>summary{grid-template-columns:34px minmax(0,1fr) 26px;gap:10px;padding:11px 13px}.quraysh-panel-title b{font-size:14px}.quraysh-panel-body{padding:12px}.quraysh-figures-scroll{max-height:74dvh}
 }
 @media(max-width:600px){
   .guide-panel{left:0;right:0;top:auto;bottom:0;width:100%;height:min(82dvh,760px);border-right:0;border-top:1px solid rgba(215,182,111,.2);border-radius:24px 24px 0 0;transform:translateY(104%);padding:58px 18px 28px}

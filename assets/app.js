@@ -73,6 +73,37 @@ document.querySelectorAll('.expanded-tree').forEach(tree=>{
   });
 });
 
+/* Keep the dense Quraysh material compact: only one post-tree panel stays open. */
+document.querySelectorAll('.quraysh-content-stack').forEach(group=>{
+  const panels=[...group.querySelectorAll(':scope > .quraysh-content-panel')];
+  panels.forEach(panel=>panel.addEventListener('toggle',()=>{
+    if(!panel.open)return;
+    panels.forEach(other=>{if(other!==panel)other.open=false;});
+  }));
+});
+
+/* Independent desktop columns prevent short Quraysh cards from inheriting a tall row gap. */
+document.querySelectorAll('.quraysh-figure-groups').forEach(grid=>{
+  const cards=[...grid.children].filter(card=>card.classList.contains('qahtan-figure-group'));
+  if(cards.length<3)return;
+  const firstColumn=document.createElement('div');
+  const secondColumn=document.createElement('div');
+  firstColumn.className='quraysh-figure-column';
+  secondColumn.className='quraysh-figure-column';
+  const mobileQuery=window.matchMedia('(max-width:720px)');
+  const arrange=()=>{
+    if(mobileQuery.matches){
+      grid.replaceChildren(...cards);
+      return;
+    }
+    cards.forEach((card,index)=>(index%2===0?firstColumn:secondColumn).append(card));
+    grid.replaceChildren(firstColumn,secondColumn);
+  };
+  arrange();
+  if(mobileQuery.addEventListener)mobileQuery.addEventListener('change',arrange);
+  else mobileQuery.addListener(arrange);
+});
+
 /* Guide */
 const curated=window.GENEALOGY_GUIDE||{};
 const arabicMarks=/[\u0610-\u061a\u064b-\u065f\u0670\u06d6-\u06ed]/g;
@@ -140,6 +171,45 @@ candidates.forEach((el,i)=>{
   el.append(b);
 });
 
+/* Append the appropriate prayer to every companion name shown by the guide. */
+function companionHonorific(record){
+  const type=record?.type||'';
+  if(/صحابية|أم المؤمنين/.test(type))return 'رضي الله عنها';
+  if(/صحابي|صغار الصحابة/.test(type))return 'رضي الله عنه';
+  return '';
+}
+const honorificById=new Map();
+Object.values(curated).forEach(record=>{
+  const honorific=companionHonorific(record);
+  if(!honorific||/رضي الله عن(?:ه|ها)/.test(record.name||''))return;
+  honorificById.set(record.id,honorific);
+});
+const directlyNamedFemaleCompanions=new Set([
+  'خديجة بنت خويلد','سودة بنت زمعة','عائشة بنت أبي بكر','حفصة بنت عمر',
+  'زينب بنت خزيمة','زينب بنت جحش','جويرية بنت الحارث','أم حبيبة رملة بنت أبي سفيان',
+  'صفية بنت حيي','أم سلمة هند بنت أبي أمية','ميمونة بنت الحارث',
+  'زينب','رقية','أم كلثوم','فاطمة','صفية'
+].map(norm));
+const directlyNamedMaleCompanions=new Set(['العباس','حمزة'].map(norm));
+candidates.forEach(el=>{
+  const id=nodeRecord.get(el)||el.dataset.guideId;
+  const nodeName=cleanNodeName(el);
+  const normalizedName=norm(nodeName);
+  const honorific=honorificById.get(id)
+    ||(directlyNamedFemaleCompanions.has(normalizedName)?'رضي الله عنها':'')
+    ||(directlyNamedMaleCompanions.has(normalizedName)?'رضي الله عنه':'');
+  if(!honorific||/رضي الله عن(?:ه|ها)/.test(nodeName))return;
+  const textNode=[...el.childNodes].find(node=>node.nodeType===Node.TEXT_NODE&&node.nodeValue.trim());
+  if(textNode)textNode.nodeValue=textNode.nodeValue.replace(/\s*$/,'')+` ${honorific} `;
+});
+Object.values(curated).forEach(record=>{
+  const honorific=honorificById.get(record.id);
+  if(!honorific)return;
+  const originalName=record.name;
+  record.aliases=[...new Set([...(record.aliases||[]),originalName])];
+  record.name=`${originalName} ${honorific}`;
+});
+
 const allRecords=Object.values(curated);
 const getRecord=id=>curated[id];
 const guideCount=document.getElementById('guide-count');
@@ -201,7 +271,8 @@ function openGuide(id,backId=null){
   const tags=a=>a?.length?`<div class="panel-tags">${a.map(x=>`<span>${esc(x)}</span>`).join('')}</div>`:'';
   const figureTags=a=>a?.length?`<div class="panel-tags panel-figures">${a.map(name=>{
     const figureId=pickRecord(name,r.lineage||'');
-    return figureId?`<button type="button" data-guide-figure="${esc(figureId)}">${esc(name)}<small>عرض التعريف</small></button>`:`<span>${esc(name)}</span>`;
+    const figureName=figureId?(getRecord(figureId)?.name||name):name;
+    return figureId?`<button type="button" data-guide-figure="${esc(figureId)}">${esc(figureName)}<small>عرض التعريف</small></button>`:`<span>${esc(name)}</span>`;
   }).join('')}</div>`:'';
   const src=r.sources?.length?`<div class="panel-sources">${r.sources.map(s=>`<a class="panel-source" href="${esc(s.url)}" target="_blank" rel="noopener"><strong>${esc(s.title)}</strong>${s.kind?`<span>${esc(s.kind)}</span>`:''}<small>${esc(s.citation||'')}</small></a>`).join('')}</div>`:'';
   const verse=r.verse?.text?`<blockquote class="panel-verse"><p>${esc(r.verse.text).replace(/\n/g,'<br>')}</p>${r.verse.source?`<cite>${esc(r.verse.source)}</cite>`:''}</blockquote>`:'';
