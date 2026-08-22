@@ -87,7 +87,7 @@ h1{font-size:clamp(44px,6.2vw,82px);line-height:1.18;margin:18px 0 14px;letter-s
 .qahtan-info-card,.qahtan-figure-group{border:1px solid rgba(255,255,255,.075);border-radius:16px;padding:15px;background:rgba(255,255,255,.018)}
 .qahtan-info-card h4,.qahtan-figure-group h4{margin:4px 0 9px;font-size:16px;color:var(--gold2)}
 .qahtan-card-kicker{color:var(--green);font-size:9px}
-.qahtan-figure-groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.qahtan-figure-groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:start}
 .adnan-figure-groups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .adnan-figure-groups .qahtan-figure-group{min-width:0}
 .figure-subgroup+.figure-subgroup{margin-top:14px;padding-top:13px;border-top:1px solid rgba(255,255,255,.065)}
