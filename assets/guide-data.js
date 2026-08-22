@@ -12740,3 +12740,187 @@ applyQurayshReview();
     guide[id] = record(id, name, type, `البيت النبوي ← ${name}`, summary, { sources: [tabaqat, isaba] });
   });
 })();
+
+/*
+ * Canonical directory pass.
+ * The section builders above deliberately create rich records close to their
+ * source material. This final pass joins records that describe the same
+ * historical person or lineage node, while retaining genuinely different
+ * people who happen to share a name.
+ */
+(() => {
+  const guide = window.GENEALOGY_GUIDE || {};
+  if (!guide || typeof document === "undefined") return;
+
+  const uniqueText = values => [...new Set((values || []).filter(Boolean))];
+  const uniqueSources = values => {
+    const seen = new Set();
+    return (values || []).filter(source => {
+      if (!source) return false;
+      const key = `${source.title || ""}|${source.url || ""}`;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  };
+  const preferLonger = (first, second) =>
+    String(second || "").length > String(first || "").length ? second : first;
+
+  const redirects = {
+    "saba": "saba-abd-shams",
+    "adnan-node-001": "adnan",
+    "prophet-adnan": "adnan",
+    "adnan-node-002": "prophet-maadd",
+    "adnan-node-003": "prophet-nizar",
+    "adnan-node-004": "mudar",
+    "prophet-mudar": "mudar",
+    "adnan-node-005": "prophet-ilyas",
+    "adnan-node-006": "prophet-mudrika",
+    "adnan-node-007": "hudhayl",
+    "adnan-node-008": "prophet-khuzayma",
+    "adnan-node-011": "kinana",
+    "prophet-kinana": "kinana",
+    "adnan-node-012": "prophet-al-nadr",
+    "adnan-node-013": "prophet-malik",
+    "adnan-node-014": "fihr",
+    "prophet-fihr": "fihr",
+    "adnan-node-021": "tamim",
+    "adnan-node-050": "qays",
+    "adnan-node-055": "ghatafan",
+    "adnan-node-059": "abs",
+    "adnan-node-060": "dhubyan",
+    "adnan-node-061": "fazarah",
+    "adnan-node-071": "sulaym",
+    "adnan-node-072": "hawazin",
+    "adnan-node-075": "thaqif",
+    "adnan-node-080": "amir-sasaa",
+    "adnan-node-089": "rabia",
+    "adnan-node-097": "abdqays",
+    "adnan-node-110": "taghlib",
+    "adnan-node-118": "bakr",
+    "adnan-node-124": "hanifa",
+    "adnan-node-125": "ijl",
+    "prophet-ghalib": "quraysh-ghalib",
+    "prophet-luayy": "quraysh-luay",
+    "prophet-kab": "quraysh-kab",
+    "prophet-murra": "quraysh-murra",
+    "prophet-kilab": "quraysh-kilab",
+    "prophet-qusay": "qusay",
+    "prophet-abd-manaf": "quraysh-abd-manaf",
+    "prophet-hashim": "hashim",
+    "quraysh-node-010": "prophet-abd-al-muttalib",
+    "quraysh-node-023": "qf-musab",
+    "quraysh-node-036": "prophet-abd-manaf-zuhra",
+    "qf-hamza": "prophet-hamza",
+    "qf-amina": "prophet-amina",
+    "entry-326": "prophet-khadija",
+    "entry-328": "prophet-aisha",
+    "zayd-khayr": "zayd-al-khayr"
+  };
+
+  const resolveId = id => {
+    const visited = new Set();
+    let current = id;
+    while (redirects[current] && !visited.has(current)) {
+      visited.add(current);
+      current = redirects[current];
+    }
+    return current;
+  };
+
+  Object.entries(redirects).forEach(([sourceId, requestedTarget]) => {
+    const targetId = resolveId(requestedTarget);
+    const source = guide[sourceId];
+    const target = guide[targetId];
+    if (!source || !target || sourceId === targetId) return;
+
+    target.aliases = uniqueText([
+      ...(target.aliases || []),
+      ...(source.aliases || []),
+      source.name !== target.name ? source.name : ""
+    ]);
+    target.branches = uniqueText([...(target.branches || []), ...(source.branches || [])]);
+    target.figures = uniqueText([...(target.figures || []), ...(source.figures || [])]);
+    target.sources = uniqueSources([...(target.sources || []), ...(source.sources || [])]);
+    ["summary", "geography", "history", "status", "notes"].forEach(key => {
+      target[key] = preferLonger(target[key], source[key]);
+    });
+    const lineageDepth = value => String(value || "").split("←").length;
+    if (lineageDepth(source.lineage) > lineageDepth(target.lineage)) target.lineage = source.lineage;
+    if (/^(جذم|قبيلة|علم|فرع نسبي|أصل نسبي)$/.test(target.type || "") && String(source.type || "").length > String(target.type || "").length) {
+      target.type = source.type;
+    }
+    if (!target.verse && source.verse) target.verse = source.verse;
+    target.featured = Boolean(target.featured || source.featured);
+
+    document.querySelectorAll("[data-guide-id]").forEach(element => {
+      if (element.dataset.guideId === sourceId) element.dataset.guideId = targetId;
+    });
+    Object.values(guide).forEach(record => {
+      if (record?.branchId === sourceId) record.branchId = targetId;
+    });
+    delete guide[sourceId];
+  });
+
+  /* Replace old mirror links with the reviewed editions already used elsewhere. */
+  Object.values(guide).forEach(record => {
+    record.sources = uniqueSources((record.sources || []).map(source => {
+      if (!/islamport\.com/.test(source.url || "")) return source;
+      if (/الإكليل/.test(source.title || "")) {
+        return { ...source, url: "https://shamela.ws/book/352", kind: source.kind || "كتاب أنساب محقق" };
+      }
+      return { ...source, url: "https://shamela.ws/book/9793", kind: source.kind || "كتاب أنساب محقق" };
+    }));
+  });
+
+  const sectionIds = {
+    "page-extinct": "extinct",
+    "page-qahtan": "qahtan",
+    "page-adnan": "adnan",
+    "page-quraysh": "quraysh",
+    "page-prophet": "prophet"
+  };
+  const appearances = new Map();
+  const disputedAppearances = new Set();
+  document.querySelectorAll("[data-guide-id]").forEach(element => {
+    const id = resolveId(element.dataset.guideId);
+    if (id !== element.dataset.guideId) element.dataset.guideId = id;
+    const section = Object.keys(sectionIds).find(pageId => element.closest(`#${pageId}`));
+    if (!section || !guide[id]) return;
+    if (!appearances.has(id)) appearances.set(id, new Set());
+    appearances.get(id).add(sectionIds[section]);
+    if (element.classList.contains("disputed")) disputedAppearances.add(id);
+  });
+
+  const qahtanTerms = /قحطان|سبأ|حمير|كهلان|قضاعة|كندة|لخم|مذحج|طيء|الأزد|همدان|حضرموت|بجيلة|خثعم|الأشعر|الأوس|الخزرج|دوس|غامد|عاملة|جذام|كلب|جهينة|بلي/;
+  const adnanTerms = /عدنان|معد|نزار|مضر|ربيعة|إياد|قيس عيلان|تميم|هوازن|غطفان|عبس|ذبيان|بكر بن وائل|عبد القيس|تغلب|كنانة|هذيل|سليم|ثقيف|فزارة/;
+  const fallbackSection = record => {
+    const text = `${record.id || ""} ${record.lineage || ""} ${(record.aliases || []).join(" ")}`;
+    if (/^prophet-|عمود النسب النبوي|البيت النبوي|أمهات المؤمنين/.test(text)) return "prophet";
+    if (/^qf-|^quraysh-|قريش|فهر ←/.test(text)) return "quraysh";
+    if (qahtanTerms.test(text)) return "qahtan";
+    if (adnanTerms.test(text)) return "adnan";
+    return "extinct";
+  };
+
+  const isDisputed = record => /مختلف|اختلاف|خلاف|تختلف|قولين|قولان|على قول|وقيل|قيل:|غير محسوم|غير محرر|غير متفق|متباين|متأخر|تصحيف|اضطراب|لا يثبت|لا تثبت|لم تُوصل|لم يوصل/.test(
+    [record.type, record.lineage, record.summary, record.status, record.notes].filter(Boolean).join(" ")
+  );
+  const categoryFor = record => {
+    const type = record.type || "";
+    if (/^(?:علم|نبي ورسول|شاعر|ملك|حاكم)/.test(type)) return "figure";
+    if (/قبيلة|قبلي|بطن|جذم|حلف|اتحاد|أمة/.test(type)) return "tribe";
+    return "lineage";
+  };
+
+  Object.values(guide).forEach(record => {
+    const recordAppearances = [...(appearances.get(record.id) || [])];
+    record.sections = recordAppearances.length ? recordAppearances : [fallbackSection(record)];
+    record.sectionKey = record.sections[0];
+    record.category = categoryFor(record);
+    record.disputed = disputedAppearances.has(record.id) || isDisputed(record);
+    if (record.id === "prophet-abdullah-son") {
+      record.aliases = uniqueText([...(record.aliases || []), "عبد الله الطيب والطاهر"]);
+    }
+  });
+})();

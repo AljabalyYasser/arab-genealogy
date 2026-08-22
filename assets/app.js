@@ -116,7 +116,9 @@ const cleanNodeName=el=>{
 const curatedByName=new Map();
 Object.values(curated).forEach(r=>{
   [r.name,...(r.aliases||[])].forEach(n=>{
-    const k=norm(n); const ids=curatedByName.get(k)||[]; ids.push(r.id); curatedByName.set(k,ids);
+    const k=norm(n); const ids=curatedByName.get(k)||[];
+    if(!ids.includes(r.id))ids.push(r.id);
+    curatedByName.set(k,ids);
   });
 });
 
@@ -134,7 +136,8 @@ function pickRecord(name,lineage){
     else if(rl&&rl.includes(nl))score=400+nl.length;
     if(score>bestScore){best=id;bestScore=score;}
   });
-  return bestScore>0?best:ids[0];
+  /* An ambiguous bare name must never be linked to the first record by chance. */
+  return bestScore>0?best:null;
 }
 
 const nodeRecord=new WeakMap();
@@ -216,34 +219,100 @@ const guideCount=document.getElementById('guide-count');
 if(guideCount)guideCount.textContent=allRecords.length.toLocaleString('ar');
 
 function searchable(r){
-  return norm([r.name,(r.aliases||[]).join(' '),r.type,r.lineage,r.summary,r.geography,(r.branches||[]).join(' '),(r.figures||[]).join(' '),r.history,r.verse?.text,r.status,r.notes].join(' '));
+  return norm([r.name,displayGuideName(r),(r.aliases||[]).join(' '),r.type,r.lineage,r.summary,r.geography,(r.branches||[]).join(' '),(r.figures||[]).join(' '),r.history,r.verse?.text,r.status,r.notes].join(' '));
 }
 let activeFilter='all';
 const input=document.getElementById('guide-search');
 const results=document.getElementById('guide-results');
+const visibleCount=document.getElementById('guide-visible-count');
 
 function filterOK(r){
   if(activeFilter==='all')return true;
-  if(activeFilter==='علم')return (r.type||'').startsWith('علم');
-  if(activeFilter==='مختلف')return (r.status||'').includes('مختلف')||(r.notes||'').includes('خلاف');
-  if(activeFilter==='قبيلة')return !(r.type||'').startsWith('علم');
+  if(activeFilter==='disputed')return Boolean(r.disputed);
+  if(['tribe','lineage','figure'].includes(activeFilter))return r.category===activeFilter;
   return true;
+}
+const guideSectionLabels={
+  extinct:'العرب البائدة والأمم القديمة',
+  qahtan:'العرب العاربة — قحطان وفروعه',
+  adnan:'العرب المستعربة — عدنان وفروعه',
+  quraysh:'قريش وبطونها',
+  prophet:'النسب النبوي والأسرة الأقرب'
+};
+const guideSectionOrder=['extinct','qahtan','adnan','quraysh','prophet'];
+const guideCategoryLabels={tribe:'قبيلة أو بطن',lineage:'أصل أو عقدة نسبية',figure:'علم'};
+const stripHonorific=name=>(name||'').replace(/\s+رضي الله عن(?:ه|ها)$/,'').trim();
+const repeatedGuideNames=new Map();
+allRecords.forEach(record=>{
+  const key=norm(stripHonorific(record.name));
+  const records=repeatedGuideNames.get(key)||[];
+  records.push(record);
+  repeatedGuideNames.set(key,records);
+});
+const manualGuideNames=new Map([
+  ['khuzaa','خزاعة (في المسار الأزدي)'],
+  ['adnan-node-049','خزاعة (في عمود قمعة)'],
+  ['quraysh-node-032','وهب بن عبد بن قصي'],
+  ['adnan-node-142','أكلب (في عمود ربيعة)'],
+  ['kahlan-node-085','أكلب (في خثعم بالحلف)']
+]);
+const generatedGuideNames=new Map();
+const lineageAncestors=record=>(record.lineage||'').split('←').map(part=>part.trim()).filter(Boolean).slice(0,-1).reverse();
+const cleanAncestor=name=>(name||'').replace(/\s+—.*$/,'').replace(/\s+\([^)]*\)$/,'').trim();
+function patronymicCandidate(record,depth){
+  const base=stripHonorific(record.name);
+  const honorific=(record.name||'').slice(base.length);
+  const ancestors=lineageAncestors(record).slice(0,depth).map(cleanAncestor).filter(Boolean);
+  return ancestors.length?`${base} بن ${ancestors.join(' بن ')}${honorific}`:record.name;
+}
+repeatedGuideNames.forEach(records=>{
+  if(records.length<2)return;
+  records.forEach(record=>{
+    if(manualGuideNames.has(record.id))return;
+    const maxDepth=Math.max(1,lineageAncestors(record).length);
+    let chosen=patronymicCandidate(record,1);
+    for(let depth=1;depth<=maxDepth;depth+=1){
+      const candidate=patronymicCandidate(record,depth);
+      const collisions=records.filter(other=>{
+        if(manualGuideNames.has(other.id))return false;
+        return norm(patronymicCandidate(other,Math.min(depth,Math.max(1,lineageAncestors(other).length))))===norm(candidate);
+      });
+      chosen=candidate;
+      if(collisions.length===1)break;
+    }
+    generatedGuideNames.set(record.id,chosen);
+  });
+});
+function displayGuideName(record){
+  return manualGuideNames.get(record.id)||generatedGuideNames.get(record.id)||record.name;
 }
 function renderResults(){
   if(!results)return;
   const q=norm(input?.value||'');
   let list=allRecords.filter(filterOK);
-  if(q) list=list.filter(r=>searchable(r).includes(q));
-  else{
-    const featured=list.filter(r=>r.featured);
-    list=featured.length?featured:list.slice(0,18);
-  }
-  list=list.slice(0,60);
+  if(q)list=list.filter(r=>searchable(r).includes(q));
+  list=[...list].sort((a,b)=>displayGuideName(a).localeCompare(displayGuideName(b),'ar'));
+  results.classList.add('compact');
+  if(visibleCount)visibleCount.textContent=`${list.length.toLocaleString('ar')} سجل مستقل معروض`;
   if(!list.length){results.innerHTML='<div class="guide-empty">لم يظهر تطابق. جرّب الاسم بصيغة أخرى أو ابحث باسم الفرع الأعلى.</div>';return;}
-  results.innerHTML=list.map(r=>`<article class="guide-card" data-guide-card="${r.id}">
-    <div class="guide-card-head"><h3>${esc(r.name)}</h3><span class="guide-type">${esc(r.type)}</span></div>
-    <p>${esc(r.summary||'')}</p><div class="guide-path">${esc(r.lineage||'')}</div>
-  </article>`).join('');
+  const grouped=new Map();
+  list.forEach(record=>{
+    const key=guideSectionLabels[record.sectionKey]?record.sectionKey:'extinct';
+    if(!grouped.has(key))grouped.set(key,[]);
+    grouped.get(key).push(record);
+  });
+  const card=r=>{
+    const category=guideCategoryLabels[r.category]||r.type||'';
+    const displayName=displayGuideName(r);
+    return `<button type="button" class="guide-card guide-card-compact" data-guide-card="${esc(r.id)}" aria-label="فتح معلومات ${esc(displayName)}">
+      <span class="guide-card-compact-main"><strong>${esc(displayName)}</strong><small>${esc(r.lineage||r.summary||'')}</small></span>
+      <span class="guide-type">${esc(category)}</span><i aria-hidden="true">ⓘ</i>
+    </button>`;
+  };
+  results.innerHTML=guideSectionOrder.filter(key=>grouped.has(key)).map(key=>`<section class="guide-result-group">
+    <h3><span>${guideSectionLabels[key]}</span><small>${grouped.get(key).length.toLocaleString('ar')} سجلًا</small></h3>
+    <div class="guide-result-group-grid">${grouped.get(key).map(card).join('')}</div>
+  </section>`).join('');
   results.querySelectorAll('[data-guide-card]').forEach(c=>c.addEventListener('click',()=>openGuide(c.dataset.guideCard)));
 }
 function esc(s){return (s||'').toString().replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
@@ -267,16 +336,17 @@ function openGuide(id,backId=null){
   const r=getRecord(id);if(!r||!panel)return;
   const returnId=backId||r.branchId||null;
   const returnRecord=returnId?getRecord(returnId):null;
-  const backButton=returnRecord?`<button type="button" class="guide-back" data-guide-back="${esc(returnRecord.id)}">← الرجوع إلى ${esc(returnRecord.name)}</button>`:'';
+  const backButton=returnRecord?`<button type="button" class="guide-back" data-guide-back="${esc(returnRecord.id)}">← الرجوع إلى ${esc(displayGuideName(returnRecord))}</button>`:'';
   const tags=a=>a?.length?`<div class="panel-tags">${a.map(x=>`<span>${esc(x)}</span>`).join('')}</div>`:'';
   const figureTags=a=>a?.length?`<div class="panel-tags panel-figures">${a.map(name=>{
     const figureId=pickRecord(name,r.lineage||'');
-    const figureName=figureId?(getRecord(figureId)?.name||name):name;
+    const figureRecord=figureId?getRecord(figureId):null;
+    const figureName=figureRecord?displayGuideName(figureRecord):name;
     return figureId?`<button type="button" data-guide-figure="${esc(figureId)}">${esc(figureName)}<small>عرض التعريف</small></button>`:`<span>${esc(name)}</span>`;
   }).join('')}</div>`:'';
   const src=r.sources?.length?`<div class="panel-sources">${r.sources.map(s=>`<a class="panel-source" href="${esc(s.url)}" target="_blank" rel="noopener"><strong>${esc(s.title)}</strong>${s.kind?`<span>${esc(s.kind)}</span>`:''}<small>${esc(s.citation||'')}</small></a>`).join('')}</div>`:'';
   const verse=r.verse?.text?`<blockquote class="panel-verse"><p>${esc(r.verse.text).replace(/\n/g,'<br>')}</p>${r.verse.source?`<cite>${esc(r.verse.source)}</cite>`:''}</blockquote>`:'';
-  panelContent.innerHTML=`${backButton}<div class="panel-kicker">${esc(r.type)}</div><h3 class="panel-title">${esc(r.name)}</h3>
+  panelContent.innerHTML=`${backButton}<div class="panel-kicker">${esc(r.type)}</div><h3 class="panel-title">${esc(displayGuideName(r))}</h3>
     ${r.lineage?`<div class="panel-lineage">${esc(r.lineage)}</div>`:''}
     ${r.status?`<div class="panel-status">${esc(r.status)}</div>`:''}
     ${section('نبذة',r.summary?`<p>${esc(r.summary)}</p>`:'')}
