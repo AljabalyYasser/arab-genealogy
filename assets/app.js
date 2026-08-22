@@ -24,6 +24,28 @@ if(hashBtn){
   hashBtn.click();
 }
 
+/* Footer feedback: validate locally before the static form endpoint handles delivery. */
+const feedbackForm=document.getElementById('feedback-form');
+if(feedbackForm){
+  const feedbackStatus=document.getElementById('feedback-status');
+  feedbackForm.addEventListener('submit',event=>{
+    const email=feedbackForm.elements.email;
+    const message=feedbackForm.elements.message;
+    [email,message].forEach(field=>field.setAttribute('aria-invalid',String(!field.checkValidity())));
+    feedbackStatus.className='';
+    if(!feedbackForm.checkValidity()){
+      event.preventDefault();
+      feedbackStatus.textContent='أكمل البريد الإلكتروني والملاحظة بصورة صحيحة.';
+      feedbackStatus.classList.add('error');
+      feedbackForm.reportValidity();
+      return;
+    }
+    feedbackStatus.textContent='جارٍ إرسال الملاحظة…';
+    feedbackStatus.classList.add('success');
+    feedbackForm.querySelector('[type="submit"]').disabled=true;
+  });
+}
+
 /* Expanded tree folding */
 function setTreeState(tree, open){
   tree.querySelectorAll('li').forEach(li=>{

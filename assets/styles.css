@@ -246,3 +246,27 @@ body.guide-open{overflow:hidden}
   .history-points p{grid-template-columns:1fr;gap:4px}
   .prophet-name-grid,.prophet-name-grid.two,.prophet-name-grid.wives{grid-template-columns:1fr}
 }
+
+/* Final presentation refinements: centered overview, connected roots, and site footer. */
+.simple-card{text-align:center}
+.simple-card .mini-chain,.simple-card .tribes{justify-content:center}
+.section-map.expanded-tree .lineage{width:min(100%,1000px);margin-right:0;margin-left:auto}
+.section-map.expanded-tree .lineage>li{text-align:right}
+
+.site-footer{position:relative;z-index:1;margin-top:42px;border-top:1px solid rgba(215,182,111,.16);background:linear-gradient(180deg,rgba(6,17,13,.18),rgba(4,12,9,.96));box-shadow:0 -30px 70px rgba(0,0,0,.12)}
+.footer-grid{display:grid;grid-template-columns:minmax(280px,.72fr) minmax(520px,1.28fr);gap:18px;align-items:stretch;padding-top:28px}
+.footer-verse{display:grid;place-items:center;margin:0;padding:28px;border:1px solid rgba(215,182,111,.2);border-radius:22px;background:radial-gradient(circle at 50% 50%,rgba(215,182,111,.09),transparent 68%),rgba(215,182,111,.025);text-align:center}
+.footer-verse p{margin:0;color:var(--gold2);font-size:clamp(18px,2.1vw,28px);font-weight:600;line-height:2.05}
+.footer-feedback{display:grid;grid-template-columns:minmax(220px,.58fr) minmax(330px,1fr);gap:20px;padding:22px;border:1px solid var(--hair);border-radius:22px;background:linear-gradient(145deg,rgba(13,33,25,.92),rgba(8,22,16,.9))}
+.footer-feedback-copy{align-self:center}.footer-feedback-copy>span{color:var(--green);font-size:10px}.footer-feedback-copy h2{margin:5px 0 7px;color:var(--gold2);font-size:22px}.footer-feedback-copy p{margin:0;color:var(--muted);font-size:10.5px;line-height:1.8}
+.feedback-form{display:grid;gap:10px}.feedback-honey{position:absolute!important;inset:0 auto auto 0!important;width:1px!important;height:1px!important;margin:0!important;padding:0!important;border:0!important;overflow:hidden!important;clip-path:inset(50%)!important;opacity:0!important;pointer-events:none!important}.feedback-fields{display:grid;grid-template-columns:1fr 1fr;gap:9px}.feedback-form label{display:grid;gap:6px;color:#dce5df;font-size:10px}.feedback-form label span{display:flex;align-items:center;gap:6px}.feedback-form label small{color:var(--faint);font-size:8px;font-weight:400}.feedback-form input,.feedback-form textarea{width:100%;border:1px solid rgba(255,255,255,.1);border-radius:11px;background:rgba(0,0,0,.14);color:var(--text);padding:10px 11px;outline:none;resize:vertical;font:inherit}.feedback-form input[type="email"]{direction:ltr;text-align:left}.feedback-form input:focus,.feedback-form textarea:focus{border-color:rgba(215,182,111,.42);box-shadow:0 0 0 3px rgba(215,182,111,.055)}.feedback-form [aria-invalid="true"]{border-color:rgba(219,128,104,.58)}
+.feedback-actions{display:flex;align-items:center;gap:11px}.feedback-actions button{border:1px solid rgba(215,182,111,.38);border-radius:11px;background:linear-gradient(135deg,rgba(215,182,111,.2),rgba(215,182,111,.08));color:var(--gold2);padding:9px 14px;cursor:pointer;font-weight:700;font-size:10.5px}.feedback-actions button:hover{background:rgba(215,182,111,.17)}.feedback-actions button:disabled{cursor:wait;opacity:.62}.feedback-actions p{margin:0;color:var(--faint);font-size:9px;line-height:1.6}.feedback-actions p.error{color:#efc0b5}.feedback-actions p.success{color:#bfead4}
+.footer-credit{width:min(1720px,calc(100% - 48px));margin:20px auto 0;padding:16px 0 24px;border-top:1px solid var(--hair);text-align:center;color:var(--faint);font-size:9.5px}.footer-credit strong{color:var(--gold2);font-size:10.5px}
+
+@media(max-width:1100px){
+  .footer-grid{grid-template-columns:1fr}
+  .footer-feedback{grid-template-columns:minmax(210px,.48fr) minmax(330px,1fr)}
+}
+@media(max-width:720px){
+  html,body{width:100%;max-width:100%;overflow-x:clip}.site-footer,.footer-grid,.footer-verse,.footer-feedback,.footer-feedback-copy,.feedback-form,.feedback-fields,.feedback-form label{min-width:0;max-width:100%}.site-footer{margin-top:26px}.footer-grid{padding-top:18px;gap:12px}.footer-verse{padding:23px 16px}.footer-feedback{grid-template-columns:minmax(0,1fr);padding:17px;gap:15px}.feedback-fields{grid-template-columns:minmax(0,1fr)}.feedback-actions{align-items:flex-start;flex-direction:column}.footer-credit{width:calc(100% - 24px);margin-top:15px}
+}
